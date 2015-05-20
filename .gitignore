@@ -1,0 +1,7 @@
+# Data
+data/
+clean_data/
+
+.Rproj.user
+.Rhistory
+.RData

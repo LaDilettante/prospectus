@@ -1,0 +1,18 @@
+---
+title: "notes"
+author: "Anh Le"
+date: "04/23/2015"
+output: html_document
+---
+
+Mexico - 1990 - remove all FDI entry restriction because of credit squeeze in August 1982 debt crisis. Intensified in 1989 under Salinas de Gortari administration
+
+http://www.nber.org/papers/w2623.pdf -- Rogoff's paper about reputation on repaying loan is not enough for developing countries to borrow money (the country can use the money they took from not re-paying to switch to cash-in-advance loan, i.e. offer cash as insurance to borrow). The investors must actually have legal protection.
+--> However, there is no such thing as cash-in-advance loan for FDI?
+
+Country Commercial Guides can be ordered in hard copy or on diskette from the National Technical Information Service (NTIS) at 1-800-553-NTIS. U.S. exporters seeking general export information/assistance or country-specific commercial information should consult with their nearest Export Assistance Center of the U.S. Department of Commerce's Trade Information Center at (800) USA-TRADE, or go to one of the following websites: www.usatrade.gov or www.tradeinfo.doc.gov
+
+FDI regulations are well enforced
+
+Entry restriction -- % of industries that have foreign ownership restriction
+Investment screening -- % of industries that have informal screening of investment after entry
