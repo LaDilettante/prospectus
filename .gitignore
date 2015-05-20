@@ -2,6 +2,20 @@
 data/
 clean_data/
 
+# Latex
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex
+*.synctex.gz
+*.synctex.gz(busy)
+
 .Rproj.user
 .Rhistory
 .RData
