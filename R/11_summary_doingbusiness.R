@@ -29,6 +29,9 @@ d_diff2 <- ddply(d_diff, .(country, year), transform,
                  diff=c(NA,diff(obstacle)),
                  discretionary_diff = c(NA, diff(discretionary_obstacle)))
 
+tapply(d$discretionary_obstacle, d$country, summary)
+
+
 ggplot(filter(d_diff2, firm_type=="foreign")) +
   geom_boxplot(aes(factor(democracy), diff))
 
@@ -56,8 +59,23 @@ ggplot(data=filter(d, democracy==0)) +
   geom_boxplot(aes(firm_type, discretionary_obstacle)) + facet_wrap( ~ country)
 
 # obstacle
-ggplot(data=filter(d)) +
-  geom_boxplot(aes(firm_type, obstacle )) + facet_wrap( ~ country)
+pdf('../figure/fdi_domestic_treatment.pdf', w=6, h=12)
+ggplot(data=filter(d, firm_type %in% c("domestic", "foreign"))) +
+  geom_boxplot(aes(firm_type, discretionary_obstacle )) + facet_wrap( ~ country, ncol=6)
+dev.off()
+
+ggplot(data=filter(d, firm_type %in% c("domestic", "foreign"), country=="China")) +
+  geom_boxplot(aes(firm_type, discretionary_obstacle ))
+
+ggplot(data=filter(d, firm_type %in% c("domestic", "foreign"), country=="China")) +
+  geom_boxplot(aes(firm_type, discretionary_obstacle )) + facet_wrap( ~ industry)
+
+# land
+t.test(as.numeric(c218d) ~ firm_type,
+       data=filter(d, firm_type %in% c("domestic", "foreign"), country=="China"))
+# tax rate
+t.test(as.numeric(c218e) ~ firm_type,
+       data=filter(d, firm_type %in% c("domestic", "foreign"), country=="China"))
 
 ggplot(d_diff) +
   geom_boxplot(aes(democracy, ))
