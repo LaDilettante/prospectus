@@ -5,11 +5,11 @@ To measure corruption, presence of FDI, and treatment of firms across countries,
 Recall our hypothesis:
 
 \begin{quote}
-Hypothesis: The presence of large FDI firms in corrupt countries is associated with a large gap in the government's treatment of domestic firms and foreign firms.
+Hypothesis: The presence of large FDI firms in corrupt countries is associated with a large gap in the government's treatment of domestic firms and foreign firms in those countries.
 \end{quote}
 
 \begin{quote}
-Hypothesis: The presence of large FDI firms in corrupt sectors is associated with a large gap in the government's treatment of domestic firms and foreign firms.
+Hypothesis: The presence of large FDI firms in corrupt sectors is associated with a large gap in the government's treatment of domestic firms and foreign firms in those sectors.
 \end{quote}
 
 Operationalization of independent variables:
@@ -18,21 +18,27 @@ Operationalization of independent variables:
 
 \item FDI in sectors: available via the Enterprises Survey dataset. The ``largeness'' of FDI firms can be measured by constructing a Herfindahl-Hirschman Index based on the size of sale, labor, or capital of firms. This allows us to calibrate the ``largeness'' of FDI firms according to the size of the host country's market.
 
-\item Corruption: can be measured in two ways. 1) Firms' perception about corruption as an obstacle. This measure is frequently used but the least accurate since firms' perception of corruption depends not only on the level of corruption but also the characteristics of firms. 2) Hard measure of prevalence and depth of bribes, e.g. ``Was an informal payment expected or request (when applying for a license)?'', ``How much do establishments like this one give in informal payments?'' 
+\item Corruption: can be measured in two ways. 1) Firms' perception about corruption as an obstacle. This measure is frequently used but not accurate since firms' perception of corruption depends not only on the level of corruption but also the characteristics of firms. 2) Hard measure of prevalence and depth of bribes, e.g. ``Was an informal payment expected or request (when applying for a license)?'', ``How much do establishments like this one give in informal payments?'' 
 \end{itemize}
 
-Operationalization of dependent variable:
+Operationalization of dependent variable (i.e. the gap in the government's treatment of domestic firms and foreign firms):
 \begin{itemize}
-\item The gap in the government's treatment of domestic firms and foreign firms: can be measured by hard measures of business experience. It is important to choose aspects of the business experience that can be \textit{selectively} targeted by the government, e.g. tax rate, time spent dealing with inspectors, etc. In contrast, other aspects, such as quality of the labor force, days without electricity, etc. are harder to be targeted to a certain type of firms. 
+\item The gap can be measured by hard measures of business experience. It is important to choose aspects of the business experience that can be \textit{selectively} targeted by the government, e.g. tax rate, time spent dealing with inspectors, etc. In contrast, other aspects, such as quality of the labor force, days without electricity, etc. are harder to be targeted to a certain type of firms. These aspects can serve as the dependent variables in a placebo test.
 
-It is important to note that this design does not suffer from selection bias. In the large literature using FDI survey data, it is impossible to control for the fact that the foreign firms that show up in the sample are the ones that self-select into investing. However, this is not an issue for our design. Because foreign firms that self-select into investing are more likely to be similar to domestic firms that foreign firms that decide not to invest, the observed gap in the business experience of foreign and domestic firms is biased downwards, against our hypothesis.
+It is important to note that this design does not suffer from selection bias. In the large literature using FDI survey data, it is impossible to control for the fact that the foreign firms that show up in the sample are the ones that self-select into investing. However, this is not an issue for our design. Because foreign firms that self-select into investing are more likely to be similar to domestic firms than foreign firms that do not, the \textit{observed} gap in the business experience of foreign and domestic firms in the sample is biased downwards and against our hypothesis.
 \end{itemize}
 
 \subsection{Cross-sectoral and sub-national variation in Vietnam}
 
 As mentioned earlier, despite the wealth of firm-level, cross-national data in the ES dataset, its measure of corruption is still plagued by a host of measurement issues. Asking directly about firms' experience with corruption is unlikely to get an accurate answer due to sensitivity bias \citep{Coutts2011}. Researchers, including the ES team, often address this problem by framing the question about the experience with corruption of ``firms like yours.'' However, with this technique, firms may not read between the lines and actually answer about the experience of others \citep{Ahart2004}.
 
-I can remedy these problems with a research design focusing on the case of Vietnam, taking advantage by a survey list experiment by \citet{Malesky2015}, which uses unmatched count technique to accurately measure the experience of firms with corruption while avoiding sensitivity bias.
+I remedy these problems with a research design focusing on the case of Vietnam, taking advantage by a survey list experiment by \citet{Malesky2015}, which uses unmatched count technique to accurately measure the experience of firms with corruption while avoiding sensitivity bias.
+
+Recall the hypothesis:
+
+\begin{quote}
+Hypothesis: The presence of large FDI firms in provinces whose leaders are not interested in promotion is associated with a large gap in the government's treatment of domestic and foreign firms.
+\end{quote}
 
 Operationalization of independent variables:
 \begin{itemize}
@@ -55,7 +61,7 @@ Operationalization of the dependent variable, i.e. the gap in the government's t
 
 \subsection{Conjoint analysis}
 
-The crucial causal mechanism in my theory is the utility calculation of provincial officials. However, observational data does not allow us to fully approach key step because what the officials truly want may not be fulfilled due to external factors and thus cannot be observed. Furthermore, what an official wants from a FDI firm is often hard to tease out completely. A big FDI firm is an attractive source of rent, but it also brings job and technology. Indeed, perhaps this high correlation is why it is so easy for officials to extract rent from FDI under the guise of promoting economic development.
+The crucial causal mechanism in my theory is the utility calculation of provincial officials. However, observational data does not allow us to fully examine this key step because what the officials truly want may not be fulfilled due to external factors and thus cannot be observed. Furthermore, what an official wants from a FDI firm is often hard to tease out completely. A big FDI firm is an attractive source of rent, but it also brings job and technology. Indeed, perhaps this high correlation is precisely why it is so easy for officials to extract rent from FDI under the guise of promoting economic development.
 
 To truly get at the utility calculation of provincial officials, I plan to conduct a survey experiment using conjoint analysis to ask provincial officials about their preference between two hypothetical FDI firms \citep{Hainmueller2014}. The characteristics of these firms will be randomly varied across five dimensions: 1) industry, 2) size of labor force, 3) capital, 4) technology age, and 5) land, which proxies for corruption opportunities, since this is a key resource to firm that is controlled by provincial officials. If desired, it is possible to:
 \begin{itemize}
@@ -63,7 +69,7 @@ To truly get at the utility calculation of provincial officials, I plan to condu
 \item randomize the ordering of the characteristics between respondents to test for the ordering effect (i.e. knowing a firm's industry first changes how the respondent thinks about the other characteristics)
 \end{itemize}
 
-I am mainly interested in the ``average marginal component effect'' (AMCE) of \textit{land}, which is the marginal effect of \textit{land} on the likelihood of a project being preferred, averaged over the distribution of all the other components. This allows us to back-out the what provincial officials truly want from FDI project.
+I am mainly interested in the ``average marginal component effect'' (AMCE) of \textit{land}, which is the marginal effect of \textit{land} on the likelihood of a project being preferred, averaged over the distribution of all the other components. This allows us to back-out what provincial officials truly want from a FDI project.
 
-\subsubsection{Experimental design}
+\subsubsection{Conjoint analysis design}
 \input{conjoint_experiment}
