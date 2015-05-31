@@ -16,6 +16,7 @@ clean_data/
 *.synctex.gz
 *.synctex.gz(busy)
 
+*.Rproj
 .Rproj.user
 .Rhistory
 .RData
