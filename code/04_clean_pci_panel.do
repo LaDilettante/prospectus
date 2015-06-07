@@ -38,9 +38,19 @@ save isic_2012_fdi.dta, replace
 
 /*Recode Previous Iterations of PCI Data, so that ALL Years Share The Same Code*/
 
+global PCI_KEEP_VARS pci_id id* form ///
+	a1 a2 a4 a5* a6_1 a7_1 a7_2 a7_3 a8_1 a8_2 a8_3 a9 a10 ///
+	c1 c3 c4_2010 c6_2010 d14_2010 ///
+	a11* ///
+	a13* a14* ownland b3 b4 d1 d6 d10 d11 d12 d14_2 d14_3 ///
+	h3* h4* h5
 
 use PCI2010.dta, clear
-keep pci_id id* form a1 a2 a4 a5* a6_1 a7_1 a7_2 a7_3 a8_1 a8_2 a8_3 a9 a10 c1 c3 c4_2010 c6_2010 d14_2010 a13* a14* ownland b3 b4 d1 d6 d10 d11 d12 d14_2 d14_3
+keep $PCI_KEEP_VARS
+drop a11_c
+rename a11_c_new a11_c
+lab var h3 "Do you agree with the consideration “It is more prior that provinces attract for"
+lab val h3 h_opinion
 generate FDI=0
 generate year=2010
 sort id 
@@ -50,7 +60,8 @@ save rents2010_dom.dta, replace
 
 
 use PCI2011.dta, clear
-keep pci_id id* form a1 a2 a4 a5* a6_1 a7_1 a7_2 a7_3 a8_1 a8_2 a8_3 a9 a10 c1 c3 c4_2010 c6_2010 d14_2010 a13* a14* ownland b3 b4 d1 d6 d10 d11 d12 d14_2 d14_3
+keep $PCI_KEEP_VARS
+drop if id == "ID" /* 1 miscoded row */
 generate FDI=0
 generate year=2011
 order id pci_id form FDI year
@@ -62,7 +73,7 @@ save rents2011_dom.dta, replace
 
 
 use PCI2012.dta, clear
-keep pci_id id* form a1 a2 a4 a5* a6_1 a7_1 a7_2 a7_3 a8_1 a8_2 a8_3 a9 a10 c1 c3 c4_2010 c6_2010 d14_2010 a13* a14* ownland b3 b4 d1 d6 d10 d11 d12 d14_2 d14_3
+keep $PCI_KEEP_VARS
 generate FDI=0
 generate year=2012
 sort id 
@@ -71,10 +82,17 @@ drop if _m == 2
 order id pci_id form FDI year
 save rents2012_dom.dta, replace
 
+global FDI_KEEP_VARS id* form pci_id companycountry managercountry  position ///
+	a1 a1_1 a3_1 a4 a5* a6* a8 a9* a10* a11* a13 ///
+	a15* ///
+	b8* c1_1 c2 c3 c6 f9 e9 d2 d4 e1 e3 e5 e6 e7 ///
+	j1 j3
 
 use FDI2010.dta, clear
-keep id* form pci_id companycountry managercountry  position a1 a1_1 a3_1 a4 a5* a6* a8 a9* a10* a11* a13 b8* c1_1 c2  c3  c6 f9 h7 e9 d2 d4 e1 e3 e5 e6 e7
+keep $FDI_KEEP_VARS
 drop if id == "" /* These rows are all empty somehow */
+label define j3 1 "Strongly agree" 2 "Agree" 3 "Disagree" 4 "Strongly disagree", replace
+label values j3 j3
 /*replace c6=0 if c6==.|c6==.b*/
 generate FDI=1
 generate year=2010
@@ -85,7 +103,9 @@ save rents2010_fdi.dta, replace
 
 
 use FDI2011.dta, clear
-keep id* form pci_id companycountry managercountry  position a1 a1_1 a3_1 a4 a5* a6* a8 a9* a10* a11* a13 b8* c1_1 c2 c3  c6 f9 h7 e9 d2 d4 e1 e3 e5 e6 e7
+keep $FDI_KEEP_VARS
+label variable j3 "make opinion on: The provincial authorities favor state owned enterprises in gov"
+label values j3 j3
 drop if id == "" /* These rows are all empty somehow */
 generate FDI=1
 generate year=2011
@@ -98,7 +118,7 @@ save rents2011_fdi.dta, replace
 
 
 use FDI2012.dta, clear
-keep id* form pci_id companycountry managercountry  position a1 a1_1 a3_1 a4 a5* a6* a8 a9* a10* a11* a13 b6* c1_1 c2 c3  c6 f9  e8* j7 d2 d4 e1 e3 e5 e6 e7
+keep $FDI_KEEP_VARS
 generate FDI=1
 generate year=2012
 
@@ -156,6 +176,14 @@ rename a8_2 labor_lastyear
 rename a8_3 labor_thisyear
 rename a9 performance
 rename a10 expand
+
+rename a11_a pctsale_soe
+rename a11_b pctsale_state
+rename a11_c pctsale_private
+rename a11_d pctsale_foreign
+rename a11_e pctsale_export
+rename a11_f pctsale_exportind
+
 rename a13_1 lsoe
 rename a13_2 csoe
 rename a13_3 equity_nn
@@ -175,7 +203,6 @@ rename c6_2010 reg_corrupt
 rename d14_2010 proc_corrupt
 rename b4 lurc
 
-
 rename d1  inspections
 rename d6 bureaucratic_time
 rename d10 bribe_time
@@ -184,8 +211,21 @@ rename d11 bribe_size
 rename d12 service_delivered
 rename d14_3 negotiate_tax
 
+rename h3 fdi_favoritism
+rename h3_1 fdi_favoritism_landaccess
+rename h3_2 fdi_favoritism_quickeradminproc
+rename h3_3 fdi_favoritism_landclearance
+rename h3_4 fdi_favoritism_provincialsupport
+rename h3_5 fdi_favoritism_other
 
+rename h4 soe_favoritism
+rename h4_1_1 soe_favoritism_landaccess
+rename h4_1_2 soe_favoritism_loanaccess
+rename h4_1_3 soe_favoritism_quickeradminproc
+rename h4_1_4 soe_favoritism_statecontract
+rename h4_1_5 soe_favoritism_other
 
+rename h5 connection_favoritism
 
 sort id year
 save ts_rents_domestic.dta, replace
@@ -255,6 +295,13 @@ rename a6_6 finance
 rename a11_4 performance
 rename a13 expand
 
+rename a15_a pctsale_soe
+rename a15_b pctsale_state
+rename a15_c pctsale_private
+rename a15_d pctsale_foreign
+rename a15_e pctsale_export
+rename a15_f pctsale_exportind
+
 rename d2 iz
 rename c1_1 reg_time
 rename c2 oss
@@ -269,6 +316,11 @@ rename e7 service_delivered
 rename c6 reg_corrupt
 rename e9 proc_corrupt
 rename d4 lurc
+
+rename j1 prov_fdi_attitude
+recode prov_fdi_attitude -99 = .
+rename j3 soe_favoritism
+recode soe_favoritism -99=.
 
 sort id year
 save ts_rents_fdi.dta, replace
@@ -304,7 +356,6 @@ replace form2=0 if form=="B"
 drop _merge
 sort pci_id year
 merge m:1 pci_id year using 7yr_timeseries_v3.dta
-
 
 /*****************************ISIC Codes*************************/
 split isic, parse(/) limit(3)

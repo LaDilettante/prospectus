@@ -151,12 +151,13 @@ f_lm_eqn = function(m) {
 
   l <- list(a = format(coef(m)[1], digits = 2),
             b = format(abs(coef(m)[2]), digits = 2),
+            b_pval = ifelse(summary(m)$coef[1, 4] <= 0.05, "*", ""),
             r2 = format(summary(m)$r.squared, digits = 3));
 
   if (coef(m)[2] >= 0)  {
-    eq <- substitute(italic(y) == a + b %.% italic(x)*","~~italic(r)^2~"="~r2,l)
+    eq <- substitute(italic(y) == a + b^b_pval %.% italic(x)*","~~italic(r)^2~"="~r2,l)
   } else {
-    eq <- substitute(italic(y) == a - b %.% italic(x)*","~~italic(r)^2~"="~r2,l)
+    eq <- substitute(italic(y) == a - b^b_pval %.% italic(x)*","~~italic(r)^2~"="~r2,l)
   }
 
   as.character(as.expression(eq));
