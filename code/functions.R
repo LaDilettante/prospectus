@@ -28,7 +28,6 @@ f_stata_to_df <- function(df) {
 
 # Split countryyear
 f_splitcountryyear <- function(df) {
-  library(Hmisc)
   # First remove Unicode
   ascii_country <- iconv(df$country, "latin1", "ASCII", sub="")
   # Split the countryyear into country and year
@@ -37,7 +36,7 @@ f_splitcountryyear <- function(df) {
   # Create new variables year2 and country2 according to the split
   df$year <- sapply(country_year, function(x) as.numeric(x[2]))
   df$country <- sapply(country_year, function(x) paste0(x[1:(length(x)-1)]))
-  df$country <- capitalize(df$country)
+  df$country <- Hmisc::capitalize(df$country)
   return(df)
 }
 

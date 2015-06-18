@@ -1,6 +1,6 @@
 rm(list=ls())
 source("functions.R")
-packs <- c("countrycode", "psData", "WDI", "foreign", "ggplot2", "plyr", "dplyr")
+packs <- c("countrycode", "psData", "WDI", "foreign", "plyr", "dplyr")
 f_install_and_load(packs) ; rm(packs)
 
 # ---- Some constants ----

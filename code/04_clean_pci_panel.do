@@ -5,7 +5,7 @@ Anh Le's modifying it to clean the data for his prospectus
 
 set mem 500m
 set more off
-cap cd "/home/anh/projects/prospectus/data/public/PCI"
+cap cd "/home/anh/projects/prospectus/data/PCI"
 
 /*Sort ISIC Revision 4 Codes for Use in Analysis*/
 
@@ -47,8 +47,8 @@ global PCI_KEEP_VARS pci_id id* form ///
 
 use PCI2010.dta, clear
 keep $PCI_KEEP_VARS
-drop a11_c
-rename a11_c_new a11_c
+drop a11_c_new
+lab var a11_c "% of firm sales sold to private individuals or firms"
 lab var h3 "Do you agree with the consideration “It is more prior that provinces attract for"
 lab val h3 h_opinion
 generate FDI=0
@@ -158,7 +158,7 @@ rename a5_4 agriculture
 rename a5_5 mining
 rename a6_1 product
 
-* Let's not make this assumption
+* Equity est = equity this year and last year
 * replace a7_1 =a7_2 if a7_1==.|a7_1==.a|a7_1==.b
 * replace a7_1 =a7_3 if a7_1==.|a7_1==.a|a7_1==.b
 
@@ -166,7 +166,7 @@ rename a7_1 equity_est
 rename a7_2 equity_lastyear
 rename a7_3 equity_thisyear
 
-* Let's not make this assumption
+* Labor est = labor this year / last year
 * replace a8_1 =a8_2 if a8_1==.|a8_1==.a|a8_1==.b
 * replace a8_1 =a8_3 if a8_1==.|a8_1==.a|a8_1==.b
 
@@ -180,6 +180,7 @@ rename a10 expand
 rename a11_a pctsale_soe
 rename a11_b pctsale_state
 rename a11_c pctsale_private
+recode pctsale_private -99=.
 rename a11_d pctsale_foreign
 rename a11_e pctsale_export
 rename a11_f pctsale_exportind
@@ -317,8 +318,8 @@ rename c6 reg_corrupt
 rename e9 proc_corrupt
 rename d4 lurc
 
-rename j1 prov_fdi_attitude
-recode prov_fdi_attitude -99 = .
+rename j1 fdi_attitude
+recode fdi_attitude -99 = .
 rename j3 soe_favoritism
 recode soe_favoritism -99=.
 
@@ -327,6 +328,7 @@ save ts_rents_fdi.dta, replace
 rm rents2010_fdi.dta
 rm rents2011_fdi.dta
 rm rents2012_fdi.dta
+
 /**********************************************************MERGE FDI AND DOMESTIC DATA******************************/
 
 use ts_rents_domestic.dta, clear
@@ -334,6 +336,14 @@ append using ts_rents_fdi.dta
 save ts_rents_combined.dta, replace
 rm ts_rents_domestic.dta
 rm ts_rents_fdi.dta
+
+* Fill in the pctsale
+egen temp=rowtotal( pctsale_export pctsale_exportind pctsale_foreign pctsale_private pctsale_soe pctsale_state)
+foreach var of varlist  pctsale_export pctsale_exportind pctsale_foreign pctsale_private pctsale_soe pctsale_state {
+	 replace `var' = 0 if temp ==100 & missing(`var')
+	 * Assume that > 95 and < 105 is meant to be 100
+	 replace `var' = 0 if temp > 95 & temp < 105 & !missing(temp) & missing(`var')
+}
 
 generate treatment=1 if form=="A" & FDI==0
 replace treatment=0 if form=="B" & FDI==0
@@ -591,10 +601,10 @@ drop _merge
 sort isic_rev4_4digit reg_year
 merge m:1 isic_rev4_4digit reg_year using "HHI_Collapse_2242013_4dig.dta", update keepusing(ln_profit)
 drop _merge 
+*/
 
 /*Drop unused variables*/
 drop isic_dig* a3_1 a4 a5_1 a5_2 a5_3 mnc a9_1 a10_1 a10_2 a10_3 a10_4 a11_1 a11_2 a11_3 b8_2_1 b8_2_2  ///
 form* id2006 id2010 id2011 product period
-*/
 
 saveold "/home/anh/projects/prospectus/clean_data/pci_panel.dta", replace
