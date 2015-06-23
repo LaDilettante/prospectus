@@ -122,15 +122,6 @@ keep $FDI_KEEP_VARS
 generate FDI=1
 generate year=2012
 
-* Could have use recode here instead. Just recode form ("A"="B") ("B"="A")
-generate form2="B" if form=="A" & year==2012
-generate form3="A" if form=="B" & year==2012
-drop form
-generate form=form2
-replace form=form3 if form2==""
-drop form2 form3
-
-
 sort id 
 merge 1:1 id using isic_2012_fdi.dta
 order id pci_id form FDI year 
@@ -201,10 +192,10 @@ rename b3 iz
 rename c1 reg_time
 rename c3 oss
 rename c6_2010 reg_corrupt
-rename d14_2010 proc_corrupt
+rename d14_2010 govcontract_corrupt
 rename b4 lurc
 
-rename d1  inspections
+rename d1 inspections
 rename d6 bureaucratic_time
 rename d10 bribe_time
 rename d14_2 bureaucratic_rents 
@@ -315,7 +306,7 @@ rename e7 service_delivered
 
 
 rename c6 reg_corrupt
-rename e9 proc_corrupt
+rename e9 govcontract_corrupt
 rename d4 lurc
 
 rename j1 fdi_attitude
@@ -345,10 +336,16 @@ foreach var of varlist  pctsale_export pctsale_exportind pctsale_foreign pctsale
 	 replace `var' = 0 if temp > 95 & temp < 105 & !missing(temp) & missing(`var')
 }
 
-generate treatment=1 if form=="A" & FDI==0
-replace treatment=0 if form=="B" & FDI==0
-replace treatment=1 if form=="B" & FDI==1
-replace treatment=0 if form=="A" & FDI==1
+generate treatment_reg = 0
+replace treatment_reg = 1 if form == "A" & FDI == 0
+replace treatment_reg = 1 if form == "B" & FDI == 1
+replace treatment_reg = 1 if form == "A" & FDI == 1 & year == 2012
+
+generate treatment_govcontract = 0
+replace treatment_govcontract = 1 if form == "A" & FDI == 1
+replace treatment_govcontract = 1 if form == "A" & FDI == 0 & year == 2010
+replace treatment_govcontract = 1 if form == "B" & FDI == 0 & year == 2011
+replace treatment_govcontract = 1 if form == "B" & FDI == 0 & year == 2012
 
 generate SOE=1 if lsoe==1
 replace SOE=1 if csoe==1
@@ -359,9 +356,6 @@ generate connection= connection_gov+ connection_mil+ connection_soe_boss + conne
 * replace connection=0 if FDI==1
 generate connection_dich=1 if connection>0 & connection !=.
 replace connection_dich=0 if connection<=0
-
-generate form2=1 if form=="A"
-replace form2=0 if form=="B"
 
 drop _merge
 sort pci_id year
@@ -527,7 +521,12 @@ label variable fully_owned "Fully Owned FIE"
 label variable jv "Joint Venture"
 label variable private "Privately Owned"
 * label variable connection_soe "Owner Previously SOE Director or Manager"
-label variable treatment "LIST Experiment Treatment"
+
+label variable reg_corrupt "Number of activities at times of registration"
+label variable treatment_reg "LIST Experiment Treatment: registration corruption"
+label variable govcontract_corrupt "Number of activities to get government contract"
+label variable treatment_govcontract "LIST Experiment Treatment: procedural corruption"
+
 label variable SOE "SOE Connection"
 label variable WTO "Pre Post WTO Entry"
 label variable connection "Number of Political Connections min=0 max=4"

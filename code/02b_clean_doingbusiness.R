@@ -19,6 +19,15 @@ d_db <- f_splitcountryyear(d_db_raw)
 d_db$country <- f_cleancname(d_db$country)
 sort(unique(setdiff(d_db$country, d_dd$country)))
 
+# Re-label foreign tech
+d_db$foreign_technology <- revalue(factor(d_db$foreign_technology),
+                                   c("1" = "Yes", "2" = "No", "4" = NA))
+
+# Fill in missing pctsale_domestic_domestic when sum of others == 100 already
+d_db[is.na(d_db$pctsale_domestic_fie) &
+    rowSums(d_db[ , grep("pctsale_domestic_", names(d_db))], na.rm=TRUE) == 100,
+    "pctsale_domestic_fie"] <- 0
+
 # ---- Merge country ----
 load("../clean_data/countrylevel.RData")
 d_db <- left_join(d_db, d_country, by=c("country", "year"))

@@ -1,17 +1,13 @@
 rm(list = ls())
 source("functions.R")
-packs <- c("ggplot2", "plyr", "dplyr", "foreign")
+packs <- c("plyr", "dplyr", "foreign",
+           "ggplot2", "scales")
 f_install_and_load(packs)
 
 # ---- Load data ----
-load("../clean_data//d_prov.RData")
-load("../clean_data/d_fdi10.RData")
-load("../clean_data/d_fdi11.RData")
-load("../clean_data/d_fdi12.RData")
-load("../clean_data/d_fdi13.RData")
 
-d_pci <- read.dta("../clean_data/pci_panel.dta")
-d_pci_lab <- f_stata_to_df(d_pci)
+d_pci_raw <- read.dta("../clean_data/pci_panel.dta")
+d_pci_lab <- f_stata_to_df(d_pci_raw)
 
 # ---- Some constant ----
 c_provinces_withfdi <- c("Ha Noi", "Hai Phong", "Da Nang", "HCMC", "Can Tho",
@@ -19,15 +15,42 @@ c_provinces_withfdi <- c("Ha Noi", "Hai Phong", "Da Nang", "HCMC", "Can Tho",
                          "Dong Nai", "Hai Duong", "Hung Yen", "Vinh Phuc")
 
 # ---- graph ----
-# FDI corruption by province
-d_corr <- d_pci %>% filter(FDI == 1) %>%
-  group_by(pci_id, treatment) %>% summarise(m = mean(reg_corrupt, na.rm=TRUE)) %>%
-  group_by(pci_id) %>% mutate(d = c(NA, diff(m))) %>%
-  filter(!is.na(d), d >= 0, pci_id %in% c_provinces_withfdi)
+# reg_corruption by province
+d_reg <- d_pci_raw %>%
+  group_by(pci_id, FDI, treatment_reg) %>%
+  summarise(m_reg = mean(reg_corrupt, na.rm=TRUE)) %>%
+  group_by(pci_id) %>%
+  mutate(reg_corrupt = c(NA, diff(m_reg))) %>%
+  filter(treatment_reg == 1)
+molten <- melt(d_reg, id.vars = c("pci_id", "FDI"),
+               measure.vars = c("reg_corrupt"))
+molten$FDI <- revalue(factor(molten$FDI), replace = c("0"="DDI", "1"="FDI"))
+d_reg <- dcast(molten, pci_id ~ variable + FDI)
+
+d_govcontract <- d_pci_raw %>%
+  group_by(pci_id, FDI, treatment_govcontract) %>%
+  summarise(m_govcontract = mean(govcontract_corrupt, na.rm=TRUE)) %>%
+  group_by(pci_id) %>%
+  mutate(govcontract_corrupt = c(NA, diff(m_govcontract))) %>%
+  filter(treatment_govcontract == 1)
+molten <- melt(d_govcontract, id.vars = c("pci_id", "FDI"),
+               measure.vars = c("govcontract_corrupt"))
+molten$FDI <- revalue(factor(molten$FDI), replace = c("0"="DDI", "1"="FDI"))
+d_govcontract <- dcast(molten, pci_id ~ variable + FDI)
+
+d_corr <- inner_join(d_reg, d_govcontract, by=c("pci_id"))
+d_corr_highfdi <- filter(d_corr, pci_id %in% c_provinces_withfdi)
+
+ggplot(filter(d_corr, pci_id %in% c_provinces_withfdi),
+       aes(reg_corrupt_DDI, reg_corrupt_FDI)) +
+  geom_text(aes(label=paste(pci_id, year)))
+
+ggplot(filter(d_corr, pci_id %in% c_provinces_withfdi),
+       aes(govcontract_corrupt_FDI, reg_corrupt_FDI)) +
+  geom_text(aes(label=paste(pci_id, year)))
 
 
-ggplot(data=d_prov) +
-  geom_line(aes(year, h1_new)) + facet_wrap( ~ pci_id)
+#
 
 pdf('../figure/FDI_bias.pdf', w=12, h=7)
 pd_fdi_bias <- filter(d_prov, year==2009)
