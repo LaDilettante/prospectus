@@ -1,7 +1,10 @@
 rm(list = ls())
 source("functions.R")
+source("_function_corstars.R")
+source("_constants.R")
+
 packs <- c("plyr", "dplyr", "foreign",
-           "ggplot2", "scales")
+           "ggplot2", "scales", "xtable")
 f_install_and_load(packs)
 
 # ---- Load data ----
@@ -9,36 +12,60 @@ f_install_and_load(packs)
 d_pci_raw <- read.dta("../clean_data/pci_panel.dta")
 d_pci_lab <- f_stata_to_df(d_pci_raw)
 
-# ---- Some constant ----
-c_provinces_withfdi <- c("Ha Noi", "Hai Phong", "Da Nang", "HCMC", "Can Tho",
-                         "Tay Ninh", "Long An", "BRVT", "Bac Ninh", "Binh Duong",
-                         "Dong Nai", "Hai Duong", "Hung Yen", "Vinh Phuc")
+d_prov <- readRDS("../clean_data/pci_province.RData")
+
+# --- Correlation between corruption measure ----
+d_prov_diff <- d_prov %>%
+  mutate_each(funs( c(NA, diff(.)) ), -pci_id, -year)
+
+print(xtable(
+  corstars(d_prov_diff[ , grepl("^(?!pctsale|reg|custom).*DDI$", names(d_prov_diff), perl=T)]),
+           caption = "Correlation of year-on-year change across corruption measures, DDI",
+           label = "tab:cor_corrupt_ddi"),
+      file="../table/cor_corrupt_ddi.tex")
+
+print(xtable(
+  corstars(d_prov_diff[d_prov_diff$pci_id %in% c_provinces_withfdi,
+                       grepl("^(?!pctsale|reg).*FDI$", names(d_prov_diff), perl=T)]),
+           caption = "Correlation of year-on-year change across corruption measures, FDI",
+           label = "tab:cor_corrupt_fdi"),
+      file="../table/cor_corrupt_fdi.tex")
+
+hist.data.frame(select(d_corr, -pci_id, -year, -starts_with("pctsale")),
+                rugs = TRUE)
 
 # ---- graph ----
-# reg_corruption by province
-d_reg <- d_pci_raw %>%
-  group_by(pci_id, FDI, treatment_reg) %>%
-  summarise(m_reg = mean(reg_corrupt, na.rm=TRUE)) %>%
-  group_by(pci_id) %>%
-  mutate(reg_corrupt = c(NA, diff(m_reg))) %>%
-  filter(treatment_reg == 1)
-molten <- melt(d_reg, id.vars = c("pci_id", "FDI"),
-               measure.vars = c("reg_corrupt"))
-molten$FDI <- revalue(factor(molten$FDI), replace = c("0"="DDI", "1"="FDI"))
-d_reg <- dcast(molten, pci_id ~ variable + FDI)
+ggplot(filter(d_prov, pci_id %in% c_provinces_withfdi),
+       aes(bureaucratic_rents_agree_FDI, pctsale_foreign_DDI)) +
+  geom_text(aes(label=paste(pci_id, year)), position="jitter") +
+  geom_line(aes(group=pci_id)) + scale_x_continuous(labels=percent) +
+  expand_limits(x = c(0, 0.6)) +
+  labs(y = "% of sale from DDI firms to FDI firms",
+       x = "% of FDI firms agree that provinces use inspection to get bribes")
 
-d_govcontract <- d_pci_raw %>%
-  group_by(pci_id, FDI, treatment_govcontract) %>%
-  summarise(m_govcontract = mean(govcontract_corrupt, na.rm=TRUE)) %>%
-  group_by(pci_id) %>%
-  mutate(govcontract_corrupt = c(NA, diff(m_govcontract))) %>%
-  filter(treatment_govcontract == 1)
-molten <- melt(d_govcontract, id.vars = c("pci_id", "FDI"),
-               measure.vars = c("govcontract_corrupt"))
-molten$FDI <- revalue(factor(molten$FDI), replace = c("0"="DDI", "1"="FDI"))
-d_govcontract <- dcast(molten, pci_id ~ variable + FDI)
+ggplot(filter(d_prov2, pci_id %in% c_provinces_withfdi),
+       aes(bureaucratic_rents_agree_FDI, pctsale_foreign_DDI)) +
+  geom_text(aes(label=paste(pci_id)), position="jitter") +
+  geom_smooth(method="lm")
 
-d_corr <- inner_join(d_reg, d_govcontract, by=c("pci_id"))
+ggplot(data=filter(d_prov, pci_id %in% c_provinces_withfdi),
+       aes(x=factor(year), y=bureaucratic_rents_agree_FDI)) +
+  geom_line(aes(group=pci_id)) +
+  geom_text(aes(label=pci_id), data=filter(d_prov, pci_id %in% c_provinces_withfdi,
+                                           year==2010))
+
+d_pci <- d_pci_raw %>%
+  filter(FDI == 0) %>%
+  mutate(pctsale_foreign_dich = pctsale_foreign > 0) %>%
+  inner_join(d_prov, by=c("pci_id","year")) %>%
+  inner_join(d_corr, by=c("pci_id", "year"))
+d_pci_highfdi <- filter(d_pci, pci_id %in% c_provinces_withfdi)
+
+ggplot(data=d_pci_highfdi,
+       aes(x=bureaucratic_rents_agree_FDI, y=pctsale_foreign)) +
+  geom_point() +
+  geom_smooth(method="lm")
+
 d_corr_highfdi <- filter(d_corr, pci_id %in% c_provinces_withfdi)
 
 ggplot(filter(d_corr, pci_id %in% c_provinces_withfdi),
@@ -48,9 +75,6 @@ ggplot(filter(d_corr, pci_id %in% c_provinces_withfdi),
 ggplot(filter(d_corr, pci_id %in% c_provinces_withfdi),
        aes(govcontract_corrupt_FDI, reg_corrupt_FDI)) +
   geom_text(aes(label=paste(pci_id, year)))
-
-
-#
 
 pdf('../figure/FDI_bias.pdf', w=12, h=7)
 pd_fdi_bias <- filter(d_prov, year==2009)

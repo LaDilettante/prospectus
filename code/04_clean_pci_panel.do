@@ -86,7 +86,7 @@ global FDI_KEEP_VARS id* form pci_id companycountry managercountry  position ///
 	a1 a1_1 a3_1 a4 a5* a6* a8 a9* a10* a11* a13 ///
 	a15* ///
 	b8* c1_1 c2 c3 c6 f9 e9 d2 d4 e1 e3 e5 e6 e7 ///
-	j1 j3
+	f9 j1 j3
 
 use FDI2010.dta, clear
 keep $FDI_KEEP_VARS
@@ -126,8 +126,6 @@ sort id
 merge 1:1 id using isic_2012_fdi.dta
 order id pci_id form FDI year 
 save rents2012_fdi.dta, replace
-
-
 /*****************************************Stack Domestic Data and Re-Caode Variable Names for Consistency******************************/
 /*Stack*/
 use rents2010_dom.dta, clear
@@ -276,7 +274,6 @@ replace equity_est=7 if a4>=10000000 & a4<25000000
 replace equity_est=8 if a4>=25000000 & a4!=. & a4 !=.a & a4 !=.b
 replace equity_est=a5_1 if year==2012 /* a5_1 is coded as equity at est in 2012 */ 
 
-
 rename a6_1 manufacturing
 rename a6_2 construction
 rename a6_3 services
@@ -304,9 +301,10 @@ rename e5 bureaucratic_rents
 rename e6 bribe_size
 rename e7 service_delivered
 
-
 rename c6 reg_corrupt
 rename e9 govcontract_corrupt
+rename f9 custom_corrupt
+
 rename d4 lurc
 
 rename j1 fdi_attitude
