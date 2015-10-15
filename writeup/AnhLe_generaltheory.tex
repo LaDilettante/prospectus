@@ -23,30 +23,6 @@
 
 \usepackage{array,tabularx}
 
-\newenvironment{conditions*}
-  {\par\vspace{\abovedisplayskip}\noindent
-   \tabularx{\columnwidth}{>{$}l<{$} @{${}={}$} >{\raggedright\arraybackslash}X}}
-  {\endtabularx\par\vspace{\belowdisplayskip}}
-  
-\usepackage{float}
-\restylefloat{table}
-
-% various theorems, numbered by section
-
-\newtheorem{thm}{Theorem}[section]
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{conj}[thm]{Conjecture}
-
-\DeclareMathOperator{\id}{id}
-
-\newcommand{\bd}[1]{\mathbf{#1}}  % for bolding symbols
-\newcommand{\RR}{\mathbb{R}}      % for Real numbers
-\newcommand{\ZZ}{\mathbb{Z}}      % for Integers
-\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
-\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
-
 % bibliography
 \usepackage{natbib}
 \bibpunct{(}{)}{;}{a}{}{,} % no comma between author and year
@@ -58,23 +34,7 @@
 \begin{document}
 \maketitle
 
-\section{Empirical Puzzle}
-\input{empirical_puzzle}
-
-\section{Tentative Evidence}
-\input{preliminary_evidence}
-
 \section{Generalized Theory}
 \input{trade_off}
 
-\section{Contextualized theory}
-\input{theory}
-
-
-\section{Research Design}
-\input{research_design}
-
-\clearpage
-\bibliographystyle{chicago}
-\bibliography{library}
 \end{document}
