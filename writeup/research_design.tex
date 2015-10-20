@@ -1,5 +1,6 @@
 
-\subsection{Measuring the main dependent variable: spillover effect}
+\subsection*{Measuring the main dependent variable: spillover effect}
+\label{sec:measure_spillover}
 
 \subsubsection*{Measuring spillover indirectly}
 
@@ -8,7 +9,7 @@ Similar to how growth economists start endogenizing technological change, FDI re
 These channels are:
 \begin{itemize}
 	\item imitation:  private firms may reverse engineer a production or management technique \citep{Wang1992}, which is facilitated by backward linkage between local and foreign firms \citep{Javorcik2004}. This motivates my first measure of spillover effect: \% of private firms that participate in contracts with foreign firms.
-	\item competition: similar to the effect of competition from arm's length trade on productivity, the presence of foreign firms in the domestic market put pressure on local firms to reduce inefficiency \citep{Glass2002}. (Doing Business has firm-level data on the number of private/state/foreign competitors in the last year)
+	\item competition: similar to the effect of competition from arm's length trade on productivity, the presence of foreign firms in the domestic market put pressure on local firms to reduce inefficiency \citep{Glass2002}.
 	\item export demonstration: foreign firms are more knowledgeable about exporting, which involves high fixed cost to set up a distribution and transport infrastructure, or learning about foreign taste and regulatory environment. Domestic firms can learn this ``export know-how'' from foreign firms \citep{Aitken1997}. This motivates my third measure of spillover effect: \% of private firms that export.
 	\item skills acquisition: workers trained in foreign firms bring along their human capital when they move to domestic firms \citep{Djankov2000}. This presumes a healthy domestic sector that can offer competitive wages to workers.
 \end{itemize}
@@ -62,71 +63,56 @@ A &= \exp^{\hat\beta_0 + \hat\epsilon_i}
 
 
 
-\subsection{Hierarchical model using cross-national, cross-sectoral data}
-
-To measure corruption, presence of FDI, and treatment of firms across countries, I utilize the World Bank's Enterprise Survey (ES), which includes a wealth of firm-level data across 125 countries, spanning various topics from investment, labor, to business-government relation \citep{WorldBank2015}. The Enterprise Survey uses stratified random sampling (using three strata: firm size, business sector, and region) in order to ensure representativeness. The survey data comes from face-to-face interviews with upper management and is anonymized to ensure confidentiality at all times.\footnote{For more on the methodology of the Enterprise Survey, visit \url{http://www.enterprisesurveys.org/methodology}} This dataset has a wealth of firm-level data that helps us operationalize key concepts as detailed below.
-
-Recall our hypothesis:
-
-\begin{quote}
-Hypothesis: The presence of large FDI firms in corrupt countries is associated with a low level of spillover effect in those countries.
-\end{quote}
-
-\begin{quote}
-Hypothesis: The presence of large FDI firms in corrupt sectors is associated with a low level of spillover effect in those sectors.
-\end{quote}
-
-Operationalization of independent variables:
-\begin{itemize}
-\item FDI in countries: available via UNCTAD data on FDI flows and stocks to countries.
-
-\item FDI in sectors: available via the Enterprises Survey dataset. The ``largeness'' of FDI firms can be measured by constructing a Herfindahl-Hirschman Index based on the size of sale, labor, or capital of firms. This allows us to calibrate the ``largeness'' of FDI firms according to the size of the host country's market.
-
-\item Corruption: can be measured in two ways. 1) Firms' perception about corruption as an obstacle. This measure is frequently used but not accurate since firms' perception of corruption depends not only on the level of corruption but also the characteristics of firms. 2) Hard measure of prevalence and depth of bribes, e.g. ``Was an informal payment expected or request (when applying for a license)?'', ``How much do establishments like this one give in informal payments?'' 
-\end{itemize}
-
-
-\subsection{OECD ABC and List experiment to better measure corruption}
-
-As mentioned earlier, despite the wealth of firm-level, cross-national data in the ES dataset, its measure of corruption is still plagued by a host of measurement issues. 
-
-Asking directly about firms' experience with corruption is unlikely to get an accurate answer due to sensitivity bias \citep{Coutts2011}. Researchers, including the ES team, often address this problem by framing the question about the experience with corruption of ``firms like yours.'' However, with this technique, firms may not read between the lines and actually answer about the experience of others \citep{Ahart2004}.
-
-I remedy these problems with a research design focusing on the case of Vietnam, taking advantage by a survey list experiment by \citet{Malesky2015}, which uses unmatched count technique to accurately measure the experience of firms with corruption while avoiding sensitivity bias.
+\subsection{Project 1: Country and Sectoral variation in the ``price'' of spillover}
 
 Recall the hypothesis:
 
 \begin{quote}
-Hypothesis: The presence of large FDI firms in provinces whose leaders are not interested in promotion is associated with a low level of spillover effect.
+Hypothesis: Government official will pursue less bribe from firms in industries where it is easier to generate spillover
 \end{quote}
 
-Operationalization of independent variables:
+As alluded to earlier, the identification strategy of this project is to use the level of spillover in US industries as the instrumental variables for industry-specific characteristics that affect its potential for spillover. Then, I'll use this instrumental variable in hierarchical model using cross-national, cross-sectoral data.
+
+To measure corruption, presence of FDI, and treatment of firms across countries, I utilize the World Bank's Enterprise Survey (ES), which includes a wealth of firm-level data across 125 countries, spanning various topics from investment, labor, to business-government relation \citep{WorldBank2015}. The Enterprise Survey uses stratified random sampling (using three strata: firm size, business sector, and region) in order to ensure representativeness. The survey data comes from face-to-face interviews with upper management and is anonymized to ensure confidentiality at all times.\footnote{For more on the methodology of the Enterprise Survey, visit \url{http://www.enterprisesurveys.org/methodology}} This dataset has a wealth of firm-level data that helps us operationalize key concepts as detailed below.
+
+Operationalization of variables:
 \begin{itemize}
-\item FDI in province: provincial statistics of FDI flow (government website)
-\item FDI in sectors: government website
-\item Corruption: list experiment \citep{Malesky2015}
-\item Interest in promotion: 
-\begin{itemize}
-	\item base chance of promotion: years until retirement (retirement age is 60 for male, 55 for female)
-	\item appearance in centrally controlled newspapers as a proxy for the decision to pursue promotion
-\end{itemize}
+\item FDI spillover: See \Cref{sec:measure_spillover}. The level of FDI by sectors is available via the Enterprises Survey dataset.\footnote{It would be better if there is UNCTAD data for FDI by sector, since the Enterprize Survey is not designed to account for all FDI inflow. Without weights, it is difficult to accurately get the population of foreign firms from the ES' sample of foreign firms.}
+
+\item Corruption: can be measured in two ways. 1) Firms' perception about corruption as an obstacle. This measure is frequently used but is not accurate since firms' perception of corruption depends not only on the level of corruption but also the characteristics of firms. 2) Hard measure of prevalence and depth of bribes, e.g. ``Was an informal payment expected or request (when applying for a license)?'', ``How much do establishments like this one give in informal payments?'' 
 \end{itemize}
 
+\subsection{Project 2: OECD's anti-bribery convention raising the cost of bribery}
 
-\subsection{Vietnam case study: addressing issues of endogeneity and measurement error of corruption}
+Recall the hypothesis:
 
-In the cross national design, the corruption variable is problematic for two reasons. First, corruption, due to its complex institutional causes, is likely to be endogenous to a host of unobserved factors that also affect spillover. Second, a direct measure of corruption tends to suffer from sensitivity bias. In this section, I address both of these issues in turn, using 1) an exogenous shock to the level of corruption in Vietnam following the Phase 3 (Enforcement) of the OECD's anti-bribery convention in 2009, and 2) data from a list experiment by \citet{Malesky2015} to measure corruption.
+\begin{quote}
+Hypothesis: The Phase 3 (Enforcement) of OECD's Anti-Bribery Convention causes firms from member countries to have more spillover and pay less bribe.
+\end{quote}
 
+As discussed, the identification strategy is to use the enforcement of the ABC as an exogenous shock to the cost of bribing of foreign firms in Vietnam. FDI data in Vietnam comes from the Vietnam's Enterprise Census, an annual census on the operation of all enterprises in Vietnam.
 
-\subsection{Conjoint analysis of Vietnamese officials' preference}
+This project also takes advantage of the list experiment by \citet{Malesky2015} to measure the level of bribery more accurately as firms feel safer about disclosing corrupt activities. Indeed, asking directly about firms' experience with corruption is unlikely to get an accurate answer due to sensitivity bias \citep{Coutts2011}. Researchers, including the ES team, often address this problem by framing the question about the experience with corruption of ``firms like yours.'' However, with this technique, firms may not read between the lines and actually answer about the experience of others \citep{Ahart2004}.
 
-A crucial causal mechanism in my theory is the utility calculation of provincial officials, which weighs between the developmental impact and the potential for bribes of FDI. It is difficult to fully examine this key step with only observational data because what officials truly want may not be fulfilled due to external factors and thus cannot be observed. Furthermore, what an official wants from a FDI firm is often hard to tease out completely. A big FDI firm is an attractive source of rent, but it also brings job and technology. Indeed, perhaps this high correlation is precisely why it is so easy for officials to extract rent from FDI under the guise of promoting economic development.
+The unmatched count technique used in \citet{Malesky2015}, circumvents these issues and provide a more accurate measure of corruption.
+
+\subsection{Project 3: Vietnamese provincial officials' time horizon}
+
+Recall the hypothesis:
+
+\begin{quote}
+In provinces whose leaders are in their last term before the mandated retirement age, there are more spillover and less bribe from the foreign firms.
+\end{quote}
+
+The identification strategy is a fuzzy regression discontinuity with the last term before retirement serving as the break point.
+
+In addition, this project also attempts to measure the preference of the official directly with a survey conjoint analysis instead of relying on observed level of bribe and spillover. This design is important for my theory, in which the crucial causal mechanism is the utility calculation of provincial officials, which weighs between the developmental impact and the potential for bribes of FDI. It is difficult to fully examine this key step with only observational data because what officials truly want may not be fulfilled due to external factors and thus cannot be observed. Furthermore, what an official wants from a FDI firm is often hard to tease out completely. A big FDI firm is an attractive source of bribe, but it also brings job and technology. Indeed, perhaps this high correlation is precisely why it is so easy for officials to extract bribe from FDI under the guise of promoting economic development.
 
 To truly get at the utility calculation of provincial officials, I plan to conduct a survey experiment using conjoint analysis to ask provincial officials about their preference between two hypothetical FDI firms \citep{Hainmueller2014}. The characteristics of these firms will be randomly varied across several dimensions: size of labor force, capital, technology age, and most importantly, need for land, which proxies for corruption opportunities.
 
 \subsubsection{Why choose land as a proxy for corruption?}
 
-To discern provincial officials' preference for corruption opportunity versus developmental impact, one must vary the hypothetical FDI projects along a characteristic that can only be attractive to officials because of its potential for corruption and not because of any other reasons. In this regard, the amount of land a project requires is the best proxy for corruption. Since land is such a scarce resource with rapidly rising value in Vietnam, acquiring land from current tenants and farmers is a difficult, sometimes violent, process. Therefore, there is neither good developmental nor political reason for local officials to prefer a project that needs a large amount of land. 
+To discern provincial officials' preference for corruption opportunity versus developmental impact, one must vary the hypothetical FDI project along a characteristic that can only be attractive to officials because of its potential for corruption and not any other reasons. In this regard, the amount of land a project requires is the best proxy for corruption. Since land is an increasingly scarce and expensive resource in Vietnam, acquiring land from current tenants and farmers is a difficult, sometimes violent, process. Therefore, there is neither good developmental nor political reason for local officials to prefer a project that needs a large amount of land. 
 
 In contrast, other characteristics of a FDI project can be preferred by officials for many different reasons. For example, a well capitalized project may signify a large pot of money to dip in, but it may also be attractive for the labor productivity enhancing effect of its capital. Similarly, a FDI firm with a large labor force may need to curry favor with officials to suppress their workers, but it may also be appealing for the jobs it creates.  Unlike those factors, land is unambiguously an indication of corruption opportunities. With a high level of \textit{monopoly} and \textit{discretion}, local officials are able to sell land access, something that investors are eager to buy.
 
