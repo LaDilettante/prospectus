@@ -16,3 +16,7 @@ FDI regulations are well enforced
 
 Entry restriction -- % of industries that have foreign ownership restriction
 Investment screening -- % of industries that have informal screening of investment after entry
+
+http://siteresources.worldbank.org/INTWBIGOVANTCOR/Resources/wps2360.pdf
+- Firm level data, show corruption change FDI decision (increase local venture, reduce wholly owned)
+- But this model is dependent on the country making offer. Two sided matching would be a generalization
