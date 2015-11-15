@@ -1,0 +1,39 @@
+\subsection{Two-sided Matching}
+
+``A two-sided approach explicitly combining models of employers' and workers' preferences, together with data on the characteristics or resources that each side values in the other, therefore provides an attractive and direct representation of the determinants of employment opportunity and choice.''
+
+While the previous model simplifies the strategic game by having the government official as the only strategic actor, we can improve the model by having the firm to be a profit maximizing actors as well.
+
+In this regards, firms and governments both have separate preferences parameters, and they will choose the option that offers the highest utility.
+
+The model is as follows:
+
+- The government makes a bunch of offers to firms, if the utility of offering employment is higher than not offering employment
+- The firm will consider all the options and pick the option that provides the highest utility
+
+TSL is related to college admission model (Roth and Sotomayer 1990), many-to-one matching problems. A country can make an offer to many firms, if these firms give a high enough utility to the country. (Note the assumption of the firm investing in only a country here. This assumption is okay if we think of different parts of a firm as different entities, this is valid modeling anyway because different parts of the firms may have different levels of potential for spillover and propensity to bribe)
+
+(There is also no explicit quota in the slots offered by the countries in the TSL model. But this is okay if we consider that the country have more slots than they have firms applying to, which is reasonable given how the countries keep attracting firms and there doesn't seem to be a hard limit)
+
+\subsubsection{Hypothesis}
+
+In this framework, the parameters in the model become the covariates of the two actors. Specifically, the government official has time horizon, pressure for jobs (i.e. left leaning), population growth 20 years ago, gdp per capita (proxy for level of capital stock). The firm will have variables like potential for spillover (by sector type), propensity to bribe (by country of origin), amount of capital, amount of jobs, relationship between host country and home country.
+
+From pablo pinto: left (DPI) x political constraint (Henisz) 
+
+Data: BEA's data of US firms investing abroad
+Data: PCI Vietnam: firms and provinces choose each other. The official would have time horizon
+
+\subsubsection{The two-sided logit (TSL) model}
+
+Intuition: If we have the complete data of all offers from all countries to all firms, we would have been able to figure out the preference.
+
+In real data, we may not have this complete data, only data where firms have already chosen a country.
+
+EM algorithm allows us to find the hidden parameters by iteratively run as follows. First, assume some values for the parameters. Then, calculate the likelihood of the label assignment. Then based on the label assignment, calculate new values for the parameters.
+
+We don't know the preference, nor all the offers. So we assume some params values for the preference, fill in the offersn, then calculate the preference again. Rinse and repeat.
+
+Of course there is the problem of local maximum, meaning that we are not guaranteed to find the best fit. The solution is to try different random start to see if they converge to the same point.
+
+\subsubsection{Data}
