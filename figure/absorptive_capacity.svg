@@ -204,15 +204,15 @@
        transform="matrix(0.89021087,0,0,0.89021087,16.391931,-7.3946837)"><flowRegion
          id="flowRegion5536"><rect
            id="rect5538"
-           width="80"
-           height="51"
+           width="106.95992"
+           height="52.123352"
            x="465"
            y="564.36218"
            style="line-height:100%" /></flowRegion><flowPara
          id="flowPara5540"
          style="font-size:20px;line-height:100%">Private</flowPara><flowPara
          style="font-size:20px;line-height:100%"
-         id="flowPara5542">benefit</flowPara></flowRoot>    <flowRoot
+         id="flowPara5542">benefit, b</flowPara></flowRoot>    <flowRoot
        transform="translate(164.20047,11.977733)"
        xml:space="preserve"
        id="flowRoot5544"
@@ -238,7 +238,7 @@
          sodipodi:role="line"
          x="30.635292"
          y="178.09158"
-         id="tspan5556">spillover</tspan></text>
+         id="tspan5556">spillover, s</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.89021087px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 137.78313,334.44186 91.43374,150.11628"
@@ -261,18 +261,18 @@
        xml:space="preserve"
        id="flowRoot5534-3"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       transform="matrix(0.89021087,0,0,0.89021087,462.78169,-7.410589)"><flowRegion
+       transform="matrix(0.89021087,0,0,0.89021087,435.78169,-8.410589)"><flowRegion
          id="flowRegion5536-9"><rect
            id="rect5538-8"
-           width="80"
-           height="51"
+           width="103.58992"
+           height="52.123329"
            x="465"
            y="564.36218"
            style="line-height:100%" /></flowRegion><flowPara
          id="flowPara5540-8"
          style="font-size:20px;line-height:100%">Private</flowPara><flowPara
          style="font-size:20px;line-height:100%"
-         id="flowPara5542-8">benefit</flowPara></flowRoot>    <text
+         id="flowPara5542-8">benefit, b</flowPara></flowRoot>    <text
        xml:space="preserve"
        style="font-size:17.80421638px;font-style:normal;font-weight:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        x="477.02502"
@@ -286,7 +286,7 @@
          sodipodi:role="line"
          x="477.02502"
          y="178.07568"
-         id="tspan5556-7">spillover</tspan></text>
+         id="tspan5556-7">spillover, s</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.89021087px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 584.28313,415.94186 205.43374,69.11628"
@@ -303,69 +303,5 @@
        d="m 615,370 0,45"
        id="path4144"
        inkscape:connector-curvature="0" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="329.58313"
-       y="500.27148"
-       id="text3039"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3041"
-         x="329.58313"
-         y="500.27148"
-         style="font-size:13px">E/p<tspan
-   style="font-size:65%;baseline-shift:sub"
-   id="tspan3127">b</tspan><tspan
-   style="font-size:65.00091553%;baseline-shift:sub"
-   id="tspan3123">1</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="211.58435"
-       y="499.61795"
-       id="text3039-7"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3041-4"
-         x="211.58435"
-         y="499.61795"
-         style="font-size:13px">E/p<tspan
-   style="font-size:65%;baseline-shift:sub"
-   id="tspan3129">b</tspan><tspan
-   style="font-size:65.00091553%;baseline-shift:sub"
-   id="tspan3125">2</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="544.82178"
-       y="337.61795"
-       id="text3039-5"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3041-5"
-         x="544.82178"
-         y="337.61795"
-         style="font-size:13px">E/p<tspan
-   style="font-size:65%;baseline-shift:sub"
-   id="tspan3131">s</tspan><tspan
-   style="font-size:65.00091553%;baseline-shift:sub"
-   id="tspan3075-9">1</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="544.82178"
-       y="420.61795"
-       id="text3039-76"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3041-54"
-         x="544.82178"
-         y="420.61795"
-         style="font-size:13px">E/p<tspan
-   style="font-size:65%;baseline-shift:sub"
-   id="tspan3133">s</tspan><tspan
-   style="font-size:65.00091553%;baseline-shift:sub"
-   id="tspan3121">2</tspan></tspan></text>
   </g>
 </svg>

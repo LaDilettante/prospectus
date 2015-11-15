@@ -3,7 +3,7 @@
 
 \subsubsection*{Measuring spillover indirectly}
 
-Similar to how growth economists start endogenizing technological change, FDI researchers investigate how technology spillover from FDI may happen instead of assuming its inevitability \citep{Romer1994}. Several channels for spillovers have been proposed, some of which suggest an indirect measure of technology spillover.
+Similar to the endogenization of technological change in growth theory, many researchers have investigated how technology spillover from FDI happens instead of assuming its inevitability \citep{Romer1994}. Several channels have been proposed, some of which suggest an indirect measure of technology spillover.
 
 These channels are:
 \begin{itemize}
@@ -13,22 +13,22 @@ These channels are:
 	\item skills acquisition: workers trained in foreign firms bring along their human capital when they move to domestic firms \citep{Djankov2000}. This presumes a healthy domestic sector that can offer competitive wages to workers.
 \end{itemize}
 
-Among these channels, \textit{imitation} and \textit{export demonstration} forms the theoretical basis of my two proxy measurements of spillover:
+Among these channels, the \textit{imitation} and \textit{export demonstration} channels form the theoretical basis of my two proxy measurements of spillover:
 \begin{enumerate}
-\item frequent business contacts between foreign and domestic firms,
-\item percentage of domestic firms engaging in export
+\item frequency of contracts between foreign and domestic firms,
+\item percentage of domestic firms engaging in export.
 \end{enumerate}
 
 \subsubsection*{Measuring spillover directly}
 
-As standard in the economic literature that studies whether there is a spillover effect for FDI, we can also measure spillover directly. This is done in two steps \citep{VanBeveren2012}.
+As standard in the economic literature that studies whether there is a spillover effect for FDI, we can also measure spillover directly. This is done in two steps.
 
 \begin{itemize}
 \item First, measure the level of technology or productivity of a firm.
 
 Level of technology: R\&D spending
 
-Level of productivity: Consider the familiar Cobb-Douglas production function:
+Level of productivity \citep{VanBeveren2012}: Consider the familiar Cobb-Douglas production function:
 
 \begin{align}
 Y &= AL^{\alpha}K^{\beta}
@@ -46,7 +46,7 @@ where the lowercase variables are the log-form of the uppercase variables (e.g. 
 y_i = \beta_0 + \beta_1 l_i + \beta_2 k_i + \epsilon_i
 \end{align} 
 
-where $\beta_0$ is the average total-factor productivity of all firms and $\epsilon$ is the firm-specific deviation from that mean. From the estimated coefficients of \autoref{eq:cobb_douglas_OLS}, we can estimate firm-level TFP as follows:
+where $\beta_0$ is the average TFP of all firms and $\epsilon$ is the firm-specific deviation from that mean. From the estimated coefficients of \autoref{eq:cobb_douglas_OLS}, we can estimate firm-level TFP as follows:
 
 \begin{align}
 a_i &= \hat\beta_0 + \hat\epsilon_i \\
@@ -55,8 +55,8 @@ A &= \exp^{\hat\beta_0 + \hat\epsilon_i}
 
 \item Having estimated firm-level TFP (or technology), we then regress TFP (or technology) on the presence of FDI in a country / sector. FDI presence can be measured as:
 \begin{itemize}
-\item amount of FDI or number of foreign firms in a country (sector). This measure focuses on the horizontal, or intra-sector, linkage of FDI
-\item number of foreign firms that the domestic firms are in contact with. This measure focuses on the vertical, or inter-sector, linkage of FDI
+\item the proportion of output in a country (sector) that comes from foreign firms in that sector. This measure focuses on the horizontal, or intra-sectoral, linkage of FDI.
+\item the proportion of input and output of a sector that comes from and to foreign firms (as measured in the input-output table). This measure focuses on the vertical, or inter-sectoral, linkage of FDI.
 \end{itemize}
 \end{itemize}
 
