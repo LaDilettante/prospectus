@@ -1,0 +1,32 @@
+\section{Appendix: Two-sided logit}
+
+If we assume that the $\epsilon_{0ij}$ have independent, standard Gumbel distributions, the probability that official $j$ will make an offer to firm $i$ is:
+
+\begin{align}
+Pr(o_{ij} = 1) &= \frac{\exp(\beta_j x_i)}{1 + \exp(\beta_j x_i)}
+\end{align}
+
+where $o_ij$ is a dummy variable indicating an offer is made.
+
+Regarding the working, the probability that investing in the country $j$, given a set of offers $O_k$:
+
+\begin{align}
+Pr(A_{ij} | O_k) =\begin{cases}
+\frac{\exp(\alpha_i w_{ij})}{\displaystyle \sum_{h \in O_k} \exp(\alpha_i w_{ih})}, j \in O_k\\
+0, j \notin O_k
+\end{cases}
+\end{align}
+
+This is a polytomous conditional logit model in the discrete choice literature.
+
+The probability that we want to fit a model to is probability that firm $i$ invests in country $j$ and we observe the investment:
+
+\begin{align}
+&Pr(A_{ij}) \\
+&= \sum_{k=1}^R Pr(A_{ij}|S_{ik}) Pr(S_{ik}) \\
+&= \sum_{k=1}^R Pr(A_{ij} | S_{ik}) \prod_{m \in O_k} Pr(o_{im} = 1) \prod_{n \in \bar O_k} Pr(o_{in} = 0) \\
+&= \sum_{k:j \in O_k} \frac{\exp(\alpha_i w_{ij})}{\displaystyle\sum_{h \in O_k} \exp(\alpha_i w_{ih})} \prod_{m \in O_k, m > 0} \frac{\exp(\beta_m x_{i})}{1 + \exp(\beta_m x_i)} \\
+&\times \prod_{n \in \bar O_k, n > 0} \frac{1}{1 + \exp(\beta_n x_i)} \\
+&= \sum_{k:j \in O_k} \frac{\exp(\alpha w_{ij})}{\displaystyle\sum_{h \in O_k} \exp(\alpha w_{ih})} \prod_{m \in O_k, m > 0} \frac{\exp(\beta x_{i})}{1 + \exp(\beta x_i)} \\
+&\times \prod_{n \in \bar O_k, n > 0} \frac{1}{1 + \exp(\beta x_i)}
+\end{align}
