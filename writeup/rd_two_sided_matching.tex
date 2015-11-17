@@ -1,8 +1,9 @@
 \subsection{Two-sided logit (TSL) model}
+\label{sec:rd_tsl}
 
-As discussed in \Cref{sec:theory_actors_and_choices}, here I will extend my model to consider a strategic firm using the TSL model. Designed to study the job market, the TSL is ``a two-sided approach explicitly combining models of employers' and workers' preferences, together with data on the characteristics or resources that each side values in the other, therefore provides an attractive and direct representation of the determinants of employment opportunity and choice'' \citep[117]{Logan1996}. In this section, I show how to frame the FDI investment location in the TSL framework, where the firm chooses the official based on his endowment and the official chooses the firm based on its ability to deliver spillover and private benefits. Extending my model above, the TSL allows the firm to be profit-maximizing instead of profit-satisficing. Furthermore, both sides are also strategic, taking into account not only their own preferences but also offers from the other sides \citep{Logan1996a}.
+As discussed in \Cref{sec:theory_actors_and_choices}, here I will extend my model to consider a strategic firm using the TSL model. Designed to study the job market, the TSL is ``a two-sided approach [that] explicitly [combines] models of employers' and workers' preferences \dots with data on the characteristics or resources that each side values in the other'' \citep[117]{Logan1996}. In this section, I show how to frame the FDI investment location in the TSL framework, where the firm chooses the official based on his endowment and the official chooses the firm based on its ability to deliver spillover and private benefits. Extending my model in \Cref{sec:theory_actors_and_choices}, the TSL allows the firm to be profit-maximizing instead of profit-satisficing. Furthermore, both sides are also strategic, taking into account not only their own preferences but also offers from the other sides \citep{Logan1996a}.
 
-To use the TSL model, I first categorize officials according to the length of their time horizon. Then, for each category, I estimate the preference of the official for spillover versus private benefits. The hypothesis is that officials with a longer time horizon prefer spillover. The data needed is a random sample of firms, what countries they invest in, and the relevant characteristics of firms and countries.
+The data is a random sample of firms and the countries that they invest in, including relevant firm-level and country-level covariates. The research design is to categorize those countries' officials according to the length of their time horizon. Then, for each category, I use the TSL to estimate the preference of the official for spillover versus private benefits. The hypothesis is that officials with a longer time horizon prefer spillover.
 
 In the following pages, \Cref{sec:tsl_actor_utility} specifies the actors' utility functions. \Cref{sec:tsl_estimate} discusses how the TSL model is derived from these utility functions and how it can be estimated. Finally, \Cref{sec:tsl_hypothesis} elaborates on the hypotheses regarding the effect of time horizon and how to operationalize them for testing.
 
@@ -10,7 +11,7 @@ In the following pages, \Cref{sec:tsl_actor_utility} specifies the actors' utili
 \label{sec:tsl_actor_utility}
 
 
-Using the notation from \citet{Logan1998}, we consider the utility function of the two actors, the official and the firm. Since there is only one official in a country, in this section I will refer to country $j$ and official $j$ interchangeably. For the official $j$, the utility of having firm $i$ investing in his country is:
+Using the notation from \citet{Logan1998}, we consider the utility function of the two actors, the official and the firm. Since there is only one official for a country in the model, in this section I will refer to country $j$ and official $j$ interchangeably. For the official $j$, the utility of having firm $i$ investing in his country is:
 
 \begin{align}
 U_j(i) &= \beta_j x_i + m_j + \epsilon_{1ij} \\
@@ -47,18 +48,18 @@ w_{ij} &= \text{a vector of country $j$ measured values on those characteristics
 v_{ij} &= \text{unobserved component that influences firm $i$'s utility}
 \end{align*}
 
-Firm $i$ evaluates all the countries that make an offer and chooses the one that brings the highest utility. In our model, the relevant country characteristics that the firm will consider are: labor quality, infrastructure, and market size.
+Firm $i$ evaluates all the countries that make an offer and chooses the one that brings the highest utility. In our model, the relevant country characteristics are: labor quality, infrastructure, and market size.
 
 \subsubsection{Estimate the actors' preference}
 \label{sec:tsl_estimate}
 
-We estimate the preference of firms and officials with a maximum likelihood estimator. We want to find the parameters that maximize the likelihood of the observed data, which is a series of matches between firms and countries. This likelihood is:
+Our data contains a random sample of firms and the countries in which they invest. We want to find the parameters that maximize the likelihood of this observed data. This likelihood is:
 
 \[
 L = \prod_{i,j: \text{i is matched with j}} Pr(A_{ij})
 \]
 
-where $Pr(A_{ij})$ is the probability of a specific match between firm $i$ and country $j$ and can be calculated as follows:
+where $Pr(A_{ij})$ is the probability of a specific match between firm $i$ and country $j$. $Pr(A_{ij})$ can be calculated as follows:
 
 \begin{align}
 &Pr(A_{ij}) \\
@@ -68,7 +69,7 @@ where $Pr(A_{ij})$ is the probability of a specific match between firm $i$ and c
 &\times \prod_{n \in \bar O_k, n > 0} \frac{1}{1 + \exp(\beta x_i)}
 \end{align}
 
-Here, the term $Pr(o_{ij} = 1)$ represents the probability that country $j$ makes an offer to firm $i$, through which the official's preference enters our estimation. On the other side, $Pr(A_{ij}) | S_{ik}$ is probability that firm $i$ will accept the offer from official $j$, given the offering set $O_k$. The firm's preference is reflected in our estimation through this term.\footnote{The appendix shows how these terms are derived.}
+Here, the term $Pr(o_{ij} = 1)$ represents the probability that country $j$ makes an offer to firm $i$, through which the official's preference enters our estimation. On the other side, $Pr(A_{ij}) | S_{ik}$ is the probability that firm $i$ will accept the offer from official $j$, given the offering set $O_k$. The firm's preference is reflected in our estimation through this term, $Pr(A_{ij})|S_{ik}$.\footnote{The appendix shows how these terms are derived.}
 
 It is important to note that the offering set $O_k$ contains \textit{all} offers that firm $i$ receives, only one of which is the observed match between firm $i$ and country $j$. The intuition is that if we observe the full set of offers that all officials make to all firms, then by looking at the final match we can see how firms and officials reject inferior offers and thus deduce their preferences.
 
