@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=1in]{geometry}  % set the margins to 1in on all sides
+\usepackage{graphicx}              % to include figures
+\usepackage{amsmath}               % great math stuff
+\usepackage{amsfonts}              % for blackboard bold, etc
+\usepackage{amsthm}                % better theorem environments
+
+\usepackage{rotating} % for sideway table
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\usepackage{cleveref} % Reference
+\usepackage{enumitem} % nosep
+
+\usepackage{array,tabularx}
+
+\newenvironment{conditions*}
+  {\par\vspace{\abovedisplayskip}\noindent
+   \tabularx{\columnwidth}{>{$}l<{$} @{${}={}$} >{\raggedright\arraybackslash}X}}
+  {\endtabularx\par\vspace{\belowdisplayskip}}
+  
+\usepackage{float}
+\restylefloat{table}
+
+% various theorems, numbered by section
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{hyp}{Hypothesis}
+
+\DeclareMathOperator{\id}{id}
+
+\newcommand{\bd}[1]{\mathbf{#1}}  % for bolding symbols
+\newcommand{\RR}{\mathbb{R}}      % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}}      % for Integers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+
+% bibliography
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,} % no comma between author and year
+
+\title{Prospectus: The political determinants of FDI technological spillover and corruption}
+\author{Anh Le\\PhD candidate in Political Economy, Duke University\\\href{mailto:aql3@duke.edu}{aql3@duke.edu}}
+
+
+\begin{document}
+\maketitle
+
+\section{The puzzle: why do countries offer investment incentives?}
+
+Among the benefits that FDI brings to developing countries, technological spillover
+is the most important factor to long-term economic growth. As well known from
+growth theory, capital accumulation without
+technological innovation 
+will in the long run stop generating growth due to diminishing return \citep{Solow1956}.
+This insight prompts scholars to argue that FDI is growth-enhancing
+not so much because it brings capital, but because it leads to technological
+spillover between foreign and domestic firms \citep{Nunnenkamp2004, Findlay1978}. In this view, FDI has a positive
+externality, providing a boost in domestic firms' productivity that foreign
+firms do not internalize while calculating their own benefits. This claim
+about the public benefit of FDI justifies countries' use of investment incentives
+to rectify the ``undersupply'' of FDI. 
+
+However, it remains controversial whether investment incentives truly help. First,
+incentives may not be effective in attracting FDI if multinational firms care a
+lot more about fundamentals such as market, labor, or natural resources \citep{Blomstrom2002}. Second,
+even if more FDI are attracted, there is little conclusive evidence of FDI
+having a positive effect on growth \citep{Nair-Reichert2001, Carkovic2002} or
+poverty reduction \citep{Guerra2009}. Indeed, FDI's
+growth-enhancing effect is highly conditional on the absorptive capacity
+of domestic firms. Investment incentives may be able to bring in FDI but do
+little to improve the local absorptive capacity. More
+insidious yet, handing out financial incentives deprives countries of revenue
+they could have collected from multinationals, further curtailing their ability
+to invest in improving local absorptive capacity.
+
+Despite these caveats about the effectiveness of investment incentives, why do
+many countries fixate on using them to attract FDI? To understand this puzzle, I propose that we need to take into account the
+calculus of government officials, who may be interested in FDI as a source of private benefits rather than a driver of technological growth.
+
+\section{The model: explaining FDI investment decision as an exchange between multinational firms and government officials}
+
+In the model, the official has control over a certain endowment (e.g. market
+access, cheap labor) that is attractive to multinational firms. Multinationals
+who invest in the official's territory turn this endowment into profit via their
+productive activities. Firms then share this profit with the official in
+exchange for access to the endowment.  
+
+Firms share the profit with the official in the form of a two-good bundle: 1)
+technological spillover, and 2) private benefits (to the official). The official
+wants technological spillover because it is a crucial ingredient in long-term
+growth, which in turn, brings electoral or career benefits. The official also
+wants the more direct private benefits, which can be both legal (e.g. campaign
+contribution, informal network for revolving door employment) and illegal
+(e.g. bribe, kickback).
+
+How the firm and the official determine the mix of technological spillover and private
+benefits depends on
+several factors, which I will hypothesize and examine in each project below.
+
+\subsection*{Hypothesis 1: A high cost of bribing increases the ratio of technological spillover of FDI}
+
+To test this hypothesis, I use the OECD Anti-Bribery Convention (ABC) as a shock
+in the cost of bribing. In December 2009, the OECD's Working Group on Bribery
+(WGB) announced the Enforcement phase of the ABC, increasing both the
+probability and the consequence of getting caught for firms from member
+countries. Therefore, I argue that, following the Enforcement Phase of the Anti-Bribery
+Convention, FDI firms from member countries will produce more technological
+spillover and fewer bribes than firms from non-member countries.
+
+We can test this argument in two ways.
+
+{\color{red}First, we can examine investment incentives policy across countries before and after
+ABC.} Before ABC, the cost of bribing is low---thus, we would expect officials to
+offer more investment incentives to attract FDI and share in the rent. By
+contrast, after ABC, firms will be more hesitant to offer bribes, making
+officials less enthusiastic about offering incentives. In addition, after ABC,
+we expect that the type of FDI attracted has more potential for technological
+spillover. Important for our research design, we
+expect to see this change in countries whose main FDI source is firms
+from ABC member countries, but not in countries whose main FDI source is firms
+from ABC non-member countries. This suggests a difference-in-difference research design.
+
+Second, we can focus on a case study, for which Vietnam is an ideal setting for
+three reasons. First, Vietnam attracts
+FDI from both member and non-member countries of the ABC. Second, given that
+data on bribe and corruption is often unreliable, Vietnam is unique in the availability of a FDI
+bribery data, provided by the list experiments run in its national annual business survey
+\citep{Malesky2015}. Using the unmatched count technique, the list experiment
+allows respondents to be honest in a survey
+about bribes without incriminating themselves.
+
+\subsection*{Hypothesis 2: Officials with a short time horizon prefer FDI with
+  more private benefits}
+
+Because technological spillover takes a long time to bear fruits, government
+officials with a short time horizon will prefer FDI projects that bring
+immediate private benefits to them. I test this hypothesis in two projects.
+
+{\color{red}First, cross-nationally, I use the two sided matching model to examine the
+preferences of firms and countries for one another. Originally developed for the
+labor market and the marriage market, the matching model allows us to say
+what kind of firms like what kind of countries, and vice versa. Therefore, we
+can test whether officials with a short time horizon (e.g. when their
+re-election chance is in jeopardy) prefer FDI with a high corruption tendency
+over FDI with a high spillover potential. Conversely, we can test whether FDI firms
+of a certain industry prefer countries with high labor quality, stable
+governments, or proximity to markets.} This model makes use of the
+recent availability of global firm level data, which allows us to track FDI
+investment more accurately than country level FDI flow of the past. Indeed,
+since aggregate FDI flow is calculated as a by-product of the Balance of Payment
+accounting, it perfectly captures the flow of capital on the book, but not
+necessarily the change in real factors that we care about (e.g. jobs created
+or fixed assets investment).
+
+Second, I take advantage of Vietnam's mandated retirement age in a regression
+discontinuity design. If a Vietnamese official is past the age of 60, he or she
+is serving their last term before retirement, and thus no longer has the chance
+to be promoted higher. Such officials will have a short time horizon, placing
+less value on the long-run benefit of technological spillover. Therefore, we can
+compare the mix of FDI attracted by officials just above and below the age-of-60
+threshold. According to our hypothesis, officials younger than 60 years will
+focus more on spillover and less on private benefits than officials older than
+60 years.
+
+\clearpage
+\bibliographystyle{chicago}
+\bibliography{library}
+
+\end{document}
